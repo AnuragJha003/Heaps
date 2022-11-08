@@ -1,0 +1,48 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class cmp{
+    public:
+    bool operator() (ListNode* a,ListNode* b){
+        return a->val>b->val;
+    }
+};
+
+
+
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        priority_queue<ListNode*,vector<ListNode*>,cmp> q;//MIN HEAP CREATED WITH CMP WHICH WILL RETURN THE ONE WITH HIGHER NODE VALUE
+        ListNode* dummy=new ListNode(-1);//NEW DUMMY NODE GIVEN VALUE -1 DUMMY FOR INSERTION ISKE AAGE SAB NODES ADD KR RHE 
+        ListNode* tail=dummy;//NEW SMALLEST NODE TO BE INSERTED AFTER EACH INSERTION ISSLIYE H YEH 
+        for(int i=0;i<lists.size();i++){
+            if(lists[i]!=NULL){
+                q.push(lists[i]);
+            }
+        }//ELMNTS FROM THE VECTOR PUSHED BACK INTO THE MIN HEAP VIA THIS PROCESS OFC NULL ONES BEING IGNORED 
+        while(q.size()){
+            ListNode* temp=q.top();//MIN NODE THIS ONE  TEMP THIS ONE IS TOP AND SMALLEST
+            tail->next=temp;//TAIL KE NEXT M TEMP KO INSERT KRDIYE DUMMY INIYISLLY THIS TAIL NOW ISKA NEXT KO TEMP KRDIYE
+            tail=temp;//TEMP==TAIL MADE NEW TAIL MADE AAGE PROCESS KRNE KE LIYE AS YEH TOH DELETE HOKE URR JAYEGA NA AB
+            q.pop();//POP
+            if(temp->next!=NULL) q.push(temp->next);
+            
+            
+        }
+        return dummy->next;//DUMMY HAMARA ANSWER NODE H WHICH WAS INIITLASED WITH -1 SO USKA NEXT HEAD HOGA OF ALL THE SORTED MERGED K LINKED LISTS 
+        
+        
+        
+    }
+};
+
+
+https://leetcode.com/problems/merge-k-sorted-lists/
