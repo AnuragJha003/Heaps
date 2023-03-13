@@ -19,3 +19,13 @@ class Solution{
         
     }
 };
+{
+priority_queue<int>pq;
+for(int i=0;i<n;i++){
+pq.push(arr[i]);
+while(pq.size()>k){
+pq.pop();
+}
+}
+return pq.top();
+}
