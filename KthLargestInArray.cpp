@@ -16,3 +16,18 @@ public:
 
 
 https://leetcode.com/problems/kth-largest-element-in-an-array/
+
+priority_queue<int,vector<int>,greater<int>>pq;
+for(int i=0;i<n;i++){
+pq.push(arr[i]);
+while(pq.size()>k)pq.pop();
+}
+return pq.top();//KTH LARGEST ELMNT 
+//IF TO PRINT K LARGEST ELMNTS
+vector<int> v;
+while(pq.size()){
+v.pb(pq.top());
+pq.pop();
+}
+reverse(v.begin(),v.end());
+return v;
